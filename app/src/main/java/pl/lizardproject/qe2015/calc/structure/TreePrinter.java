@@ -6,6 +6,7 @@ public class TreePrinter {
         StringBuilder builder = new StringBuilder();
         Node node = traverseToLeftMost(tree.root);
         builder.append(node.leftVal).append(" ").append(node.operation).append(" ");
+        node.visited = true;
         while(hasNextNode(node)) {
             node = findNextNode(node);
             if(node.leftNode == null) {
@@ -15,10 +16,11 @@ public class TreePrinter {
             if(node.rightNode == null) {
                 builder.append(node.rightVal).append(" ");
             }
+            node.visited = true;
         }
-        builder.append(node.rightVal);
         return builder.toString();
     }
+
 
     private static Node traverseToLeftMost(Node node) {
         Node temp = node;
@@ -36,17 +38,14 @@ public class TreePrinter {
         if(node.rightNode != null) {
             return traverseToLeftMost(node.rightNode);
         }
+        return findUnvisitedParent(node);
+    }
 
-        if(node.leftNode == null) {
-            if(node.parent != null && node.parent.rightNode != node) {
-                return node.parent;
-            } else if(node.parent != null && node.parent.rightNode == node) {
-                return traverseToLeftMost(node.parent.parent.rightNode);
-            }
-            return node.parent;
-        } else {
-
+    private static Node findUnvisitedParent(Node node) {
+        Node temp = node.parent;
+        while(temp != null && temp.visited) {
+            temp = temp.parent;
         }
-        return null;
+        return temp;
     }
 }

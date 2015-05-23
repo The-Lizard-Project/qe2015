@@ -2,7 +2,6 @@ package pl.lizardproject.qe2015;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
@@ -10,10 +9,6 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import pl.lizardproject.qe2015.calc.equation.Equation;
 import pl.lizardproject.qe2015.calc.equation.EquationImpl;
-import pl.lizardproject.qe2015.calc.operations.Add;
-import pl.lizardproject.qe2015.calc.operations.Divide;
-import pl.lizardproject.qe2015.calc.operations.Multiply;
-import pl.lizardproject.qe2015.calc.structure.Tree;
 
 
 public class MainActivity extends Activity {
@@ -28,20 +23,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        Tree t = new Tree();
-        t.addOperation(new Add(), 10, 12);
-        t.addOperation(new Multiply(), 5);
-        t.addOperation(new Multiply(), 3);
-        t.addOperation(new Divide(), 3);
-        t.addOperation(new Add(), 4);
-        t.addOperation(new Multiply(), 3);
 
-        Log.d("ZXCVBNM", "  " + t.root.calculate());
     }
 
     @OnClick(R.id.button0)
     protected void button0Clicked() {
-
     }
 
     @OnClick(R.id.button1)

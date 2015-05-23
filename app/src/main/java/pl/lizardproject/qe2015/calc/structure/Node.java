@@ -10,6 +10,7 @@ public class Node {
     Node rightNode;
     double leftVal;
     double rightVal;
+    boolean visited;
 
 
     public Node(Operation operation, Node leftNode, double rightVal) {

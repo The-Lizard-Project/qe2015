@@ -29,4 +29,17 @@ public class Tree {
         root = new Node(op, lValue, rValue);
         root.parent = null;
     }
+
+    public void resetVisits() {
+        resetVisits(root);
+    }
+
+    private void resetVisits(Node node) {
+        node.visited = false;
+        if(node.leftNode != null)
+            resetVisits(node.leftNode);
+        if(node.rightNode != null)
+            resetVisits(node.rightNode);
+    }
+
 }
