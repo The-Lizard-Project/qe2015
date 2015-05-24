@@ -7,42 +7,27 @@ import pl.lizardproject.qe2015.calc.structure.TreePrinter;
 
 public class EquationImpl implements Equation {
 
-    private Tree tree;
-    private Double lValue;
-    private Double rValue;
+    private final Tree tree;
     private Operation operation;
+    private NumberBuilder lBuilder;
+    private NumberBuilder rBuilder;
     private PrintListener listener;
 
     public EquationImpl() {
         tree = new Tree();
+        lBuilder = new NumberBuilder();
+        rBuilder = new NumberBuilder();
         cleanupState();
     }
 
     @Override
     public void addNumber(Double value) {
-        if(operation == null && lValue == null) {
-            lValue = value;
+        if(operation == null) {
+            lBuilder.addDigit(value);
         } else {
-            rValue = value;
-        }
-        if(correctOperation()) {
-            pushToTree();
+            rBuilder.addDigit(value);
         }
         printEquation();
-    }
-
-    private void printEquation() {
-        tree.resetVisits();
-        listener.printed(TreePrinter.printThatTree(tree));
-    }
-
-    private boolean correctOperation() {
-        return (lValue != null && rValue != null && operation != null) || (rValue != null && operation != null);
-    }
-
-    @Override
-    public void setListener(PrintListener listener) {
-        this.listener = listener;
     }
 
     @Override
@@ -50,23 +35,43 @@ public class EquationImpl implements Equation {
         this.operation = operation;
     }
 
+    private boolean correctOperation() {
+        return (lBuilder.isValid() && rBuilder.isValid() && operation != null) || (rBuilder.isValid() && operation != null);
+    }
+
+    @Override
+    public void setListener(PrintListener listener) {
+        this.listener = listener;
+    }
+
+
     private void pushToTree() {
-        if(lValue != null) {
-            tree.addOperation(operation, lValue, rValue);
+        if(!correctOperation()) {
+            return;
+        }
+        if(lBuilder.isValid()) {
+            tree.addOperation(operation, lBuilder.getDigit(), rBuilder.getDigit());
         } else {
-            tree.addOperation(operation, rValue);
+            tree.addOperation(operation, rBuilder.getDigit());
         }
         cleanupState();
     }
 
+    private void printEquation() {
+        tree.resetVisits();
+        listener.printed(TreePrinter.printThatTree(tree));
+    }
+
+
     private void cleanupState() {
-        lValue = null;
-        rValue = null;
+        lBuilder.reset();
+        rBuilder.reset();
         operation = null;
     }
 
     @Override
     public Double evaluate() {
+        pushToTree();
         return tree.root.calculate();
     }
 
