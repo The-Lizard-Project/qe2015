@@ -37,7 +37,7 @@ public class EquationImpl implements Equation {
 
     private boolean correctOperation() {
         return (lBuilder.isValid() && rBuilder.isValid() && operation != null)
-                || (rBuilder.isValid() && operation != null)
+                || tree.root != null && (rBuilder.isValid() && operation != null)
                 || (operation != null && !operation.requiresBothArguments());
     }
 
@@ -48,9 +48,6 @@ public class EquationImpl implements Equation {
 
 
     private void pushToTree() {
-        if(!correctOperation()) {
-            return;
-        }
         if(!operation.requiresBothArguments()) {
             if(lBuilder.isValid()) {
                 tree.addOperation(operation, lBuilder.getDigit(), -69);
@@ -69,7 +66,12 @@ public class EquationImpl implements Equation {
 
     private void printEquation() {
         tree.resetVisits();
-        listener.printed(TreePrinter.printThatTree(tree));
+        String equation = TreePrinter.printThatTree(tree);
+        equation += lBuilder.isValid() ? lBuilder.getDigit() : "";
+        equation += operation == null ? "" : " " + operation.toString() + " ";
+        equation += rBuilder.isValid() ? rBuilder.getDigit() : "";
+        listener.printed(equation);
+
     }
 
 
@@ -81,7 +83,11 @@ public class EquationImpl implements Equation {
 
     @Override
     public Double evaluate() {
-        pushToTree();
+        if(!correctOperation()) {
+            cleanupState();
+        } else {
+            pushToTree();
+        }
         if(tree.root == null) {
             return 0d;
         }
