@@ -3,6 +3,10 @@ package pl.lizardproject.qe2015.calc.structure;
 public class TreePrinter {
 
     public static String printThatTree(Tree tree) {
+        if(tree.root == null) {
+            return "";
+        }
+        int nodeCounter = 0;
         StringBuilder builder = new StringBuilder();
         Node node = traverseToLeftMost(tree.root);
         builder.append(node.leftVal).append(" ").append(node.operation).append(" ");
@@ -17,6 +21,10 @@ public class TreePrinter {
                 builder.append(node.rightVal).append(" ");
             }
             node.visited = true;
+            ++nodeCounter;
+        }
+        if(nodeCounter == 0) {
+            builder.append(node.rightVal);
         }
         return builder.toString();
     }

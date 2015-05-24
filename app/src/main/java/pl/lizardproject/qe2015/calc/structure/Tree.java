@@ -35,6 +35,9 @@ public class Tree {
     }
 
     private void resetVisits(Node node) {
+        if(node == null) {
+            return;
+        }
         node.visited = false;
         if(node.leftNode != null)
             resetVisits(node.leftNode);
