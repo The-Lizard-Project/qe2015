@@ -6,6 +6,10 @@ public class Tree {
 
     public Node root;
 
+    public void addOperation(Operation op) {
+        addOperation(op, 0);
+    }
+
     public void addOperation(Operation op, double rValue) {
         if(root.operation.getPriority() >= op.getPriority()) {
             final Node newRoot = new Node(op, root, rValue);

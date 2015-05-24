@@ -13,6 +13,11 @@ public class Divide implements Operation {
     }
 
     @Override
+    public boolean requiresBothArguments() {
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "/";
     }

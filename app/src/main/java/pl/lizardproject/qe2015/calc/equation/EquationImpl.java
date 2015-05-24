@@ -36,7 +36,9 @@ public class EquationImpl implements Equation {
     }
 
     private boolean correctOperation() {
-        return (lBuilder.isValid() && rBuilder.isValid() && operation != null) || (rBuilder.isValid() && operation != null);
+        return (lBuilder.isValid() && rBuilder.isValid() && operation != null)
+                || (rBuilder.isValid() && operation != null)
+                || (operation != null && !operation.requiresBothArguments());
     }
 
     @Override
@@ -49,10 +51,18 @@ public class EquationImpl implements Equation {
         if(!correctOperation()) {
             return;
         }
-        if(lBuilder.isValid()) {
-            tree.addOperation(operation, lBuilder.getDigit(), rBuilder.getDigit());
+        if(!operation.requiresBothArguments()) {
+            if(lBuilder.isValid()) {
+                tree.addOperation(operation, lBuilder.getDigit(), -69);
+            } else {
+                tree.addOperation(operation);
+            }
         } else {
-            tree.addOperation(operation, rBuilder.getDigit());
+            if(lBuilder.isValid()) {
+                tree.addOperation(operation, lBuilder.getDigit(), rBuilder.getDigit());
+            } else if(rBuilder.isValid()) {
+                tree.addOperation(operation, rBuilder.getDigit());
+            }
         }
         cleanupState();
     }
@@ -72,6 +82,9 @@ public class EquationImpl implements Equation {
     @Override
     public Double evaluate() {
         pushToTree();
+        if(tree.root == null) {
+            return 0d;
+        }
         return tree.root.calculate();
     }
 

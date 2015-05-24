@@ -17,4 +17,8 @@ public class Substract implements Operation {
         return "-";
     }
 
+    @Override
+    public boolean requiresBothArguments() {
+        return true;
+    }
 }

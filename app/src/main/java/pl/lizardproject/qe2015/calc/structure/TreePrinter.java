@@ -6,26 +6,21 @@ public class TreePrinter {
         if(tree.root == null) {
             return "";
         }
-        int nodeCounter = 0;
         StringBuilder builder = new StringBuilder();
         Node node = traverseToLeftMost(tree.root);
-        builder.append(node.leftVal).append(" ").append(node.operation).append(" ");
-        node.visited = true;
-        while(hasNextNode(node)) {
-            node = findNextNode(node);
+        do {
             if(node.leftNode == null) {
                 builder.append(node.leftVal).append(" ");
             }
             builder.append(node.operation).append(" ");
-            if(node.rightNode == null) {
-                builder.append(node.rightVal).append(" ");
+            if(node.operation.requiresBothArguments()) {
+                if(node.rightNode == null) {
+                    builder.append(node.rightVal).append(" ");
+                }
             }
             node.visited = true;
-            ++nodeCounter;
-        }
-        if(nodeCounter == 0) {
-            builder.append(node.rightVal);
-        }
+            node = findNextNode(node);
+        } while(node != null);
         return builder.toString();
     }
 
@@ -38,11 +33,10 @@ public class TreePrinter {
         return temp;
     }
 
-    private static boolean hasNextNode(Node node) {
-        return findNextNode(node) != null;
-    }
-
     private static Node findNextNode(Node node) {
+        if(node == null) {
+            return null;
+        }
         if(node.rightNode != null) {
             return traverseToLeftMost(node.rightNode);
         }

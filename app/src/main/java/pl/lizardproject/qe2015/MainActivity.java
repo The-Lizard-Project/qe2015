@@ -23,14 +23,12 @@ public class MainActivity extends Activity implements PrintListener {
 
     Equation equation = new EquationImpl();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
         equation.setListener(this);
-
     }
 
     @OnClick(R.id.button0)
@@ -115,7 +113,6 @@ public class MainActivity extends Activity implements PrintListener {
     @OnClick(R.id.buttonFib)
     protected void buttonFibClicked() {
         equation.addOperation(new Fibonacci());
-
     }
 
     @Override

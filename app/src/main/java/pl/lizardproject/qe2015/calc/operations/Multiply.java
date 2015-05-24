@@ -17,5 +17,8 @@ public class Multiply implements Operation {
         return "*";
     }
 
-
+    @Override
+    public boolean requiresBothArguments() {
+        return true;
+    }
 }

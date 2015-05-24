@@ -17,6 +17,11 @@ public class Fibonacci implements Operation {
         return "FIB";
     }
 
+    @Override
+    public boolean requiresBothArguments() {
+        return false;
+    }
+
     private int fibonacci(int n) {
         if(n == 0)
             return 0;

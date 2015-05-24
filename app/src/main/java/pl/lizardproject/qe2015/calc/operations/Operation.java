@@ -6,6 +6,8 @@ public interface Operation {
 
     double execute(Double l, Double r);
 
+    boolean requiresBothArguments();
+
     String toString();
 
 }
