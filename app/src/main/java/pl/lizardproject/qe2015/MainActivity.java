@@ -97,7 +97,6 @@ public class MainActivity extends Activity implements PrintListener {
         equation.addOperation(new Multiply());
     }
 
-
     @OnClick(R.id.buttonSub)
     protected void buttonSubClicked() {
         equation.addOperation(new Substract());
@@ -113,6 +112,12 @@ public class MainActivity extends Activity implements PrintListener {
     @OnClick(R.id.buttonFib)
     protected void buttonFibClicked() {
         equation.addOperation(new Fibonacci());
+    }
+
+    @OnClick(R.id.buttonClr)
+    protected void buttonClrClicked() {
+        equation.clear();
+
     }
 
     @Override

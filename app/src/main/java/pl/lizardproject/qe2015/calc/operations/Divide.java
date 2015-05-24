@@ -4,7 +4,7 @@ public class Divide implements Operation {
 
     @Override
     public int getPriority() {
-        return 1;
+        return 3;
     }
 
     @Override

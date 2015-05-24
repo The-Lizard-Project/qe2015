@@ -147,9 +147,17 @@
         android:id="@+id/buttonEq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_column="1"
+        android:layout_column="0"
         android:layout_row="8"
         android:text="="/>
+
+    <Button
+        android:id="@+id/buttonClr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="2"
+        android:layout_row="8"
+        android:text="CLR"/>
 
 
 </GridLayout>

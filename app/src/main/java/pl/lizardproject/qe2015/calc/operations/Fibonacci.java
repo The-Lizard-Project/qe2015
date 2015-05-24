@@ -4,7 +4,7 @@ public class Fibonacci implements Operation {
 
     @Override
     public int getPriority() {
-        return -100;
+        return 4;
     }
 
     @Override

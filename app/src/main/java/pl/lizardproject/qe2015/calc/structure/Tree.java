@@ -11,7 +11,7 @@ public class Tree {
     }
 
     public void addOperation(Operation op, double rValue) {
-        if(root.operation.getPriority() >= op.getPriority()) {
+        if(root.operation.getPriority() >= op.getPriority() || !op.requiresBothArguments()) {
             final Node newRoot = new Node(op, root, rValue);
             root.parent = newRoot;
             root = newRoot;
