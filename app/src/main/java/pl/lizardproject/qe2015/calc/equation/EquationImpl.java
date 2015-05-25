@@ -69,9 +69,9 @@ public class EquationImpl implements Equation {
     private void printEquation() {
         tree.resetVisits();
         String equation = TreePrinter.printThatTree(tree);
-        equation += lBuilder.isValid() ? lBuilder.getDigit().intValue() : "";
-        equation += operation == null ? "" : " " + operation.toString() + " ";
-        equation += rBuilder.isValid() ? rBuilder.getDigit().intValue() : "";
+        equation += lBuilder.isValid() ? TreePrinter.df.format(lBuilder.getDigit()) + " " : "";
+        equation += operation == null ? "" : operation.toString() + " ";
+        equation += rBuilder.isValid() ? TreePrinter.df.format(rBuilder.getDigit()) : "";
         listener.printed(equation);
     }
 
@@ -97,7 +97,7 @@ public class EquationImpl implements Equation {
     @Override
     public String print() {
         tree.resetVisits();
-        final String equation = TreePrinter.printThatTree(tree) + " = " + evaluate().intValue();
+        final String equation = TreePrinter.df.format(evaluate());
         listener.printed(equation);
         return equation;
     }
