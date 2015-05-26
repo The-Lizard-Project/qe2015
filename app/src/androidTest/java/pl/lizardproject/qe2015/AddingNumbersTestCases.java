@@ -41,7 +41,7 @@ public class AddingNumbersTestCases extends ActivityInstrumentationTestCase2<Mai
 		buttonNine = solo.getView(R.id.button9);
 		buttonAdd = solo.getView(R.id.buttonAdd);
 		buttonEqual = solo.getView(R.id.buttonEq);
-		viewDisplay = (TextView) solo.getView(R.id.calclatorViewPort);
+		viewDisplay = (TextView) solo.getView(R.id.calculatorViewPort);
 	}
 
 	@Override

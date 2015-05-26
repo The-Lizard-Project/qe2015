@@ -91,16 +91,12 @@ public class EquationImpl implements Equation {
         if(tree.root == null) {
             return 0d;
         }
-        return tree.root.calculate();
+        double calculated = tree.root.calculate();
+        cleanupState();
+        tree.root = null;
+        return calculated;
     }
 
-    @Override
-    public String print() {
-        tree.resetVisits();
-        final String equation = TreePrinter.df.format(evaluate());
-        listener.printed(equation);
-        return equation;
-    }
 
     @Override
     public void clear() {

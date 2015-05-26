@@ -48,7 +48,7 @@ public class PageObject {
 		buttonMul = solo.getView(R.id.buttonMul);
 		buttonDiv = solo.getView(R.id.buttonDiv);
 		buttonEqual = solo.getView(R.id.buttonEq);
-		viewDisplay = (TextView) solo.getView(R.id.calclatorViewPort);
+		viewDisplay = (TextView) solo.getView(R.id.calculatorViewPort);
 	}
 
 	public void clickZero() {

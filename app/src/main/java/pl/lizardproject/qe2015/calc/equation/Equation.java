@@ -13,8 +13,6 @@ public interface Equation {
 
     Double evaluate();
 
-    String print();
-
     void clear();
 
 }

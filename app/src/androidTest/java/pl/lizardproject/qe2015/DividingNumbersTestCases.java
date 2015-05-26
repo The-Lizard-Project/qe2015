@@ -37,7 +37,7 @@ public class DividingNumbersTestCases extends ActivityInstrumentationTestCase2<M
 		buttonSeven = solo.getView(R.id.button7);
 		buttonDiv = solo.getView(R.id.buttonDiv);
 		buttonEqual = solo.getView(R.id.buttonEq);
-		viewDisplay = (TextView) solo.getView(R.id.calclatorViewPort);
+		viewDisplay = (TextView) solo.getView(R.id.calculatorViewPort);
 	}
 
 	@Override
