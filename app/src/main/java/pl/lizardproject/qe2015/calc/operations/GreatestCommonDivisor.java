@@ -3,7 +3,7 @@ package pl.lizardproject.qe2015.calc.operations;
 public class GreatestCommonDivisor implements Operation {
     @Override
     public int getPriority() {
-        return 5;
+        return -1;
     }
 
     @Override
