@@ -2,10 +2,8 @@ package pl.lizardproject.qe2015.calc.operations;
 
 public class LeastCommonMultiple implements Operation {
 
+
     public static Long greatestCommonDivisor(Long x, Long y) {
-        if(x == 0 || y == 0) {
-            return 0l;
-        }
         while(x != y) {
             if(x > y)
                 x -= y;
@@ -27,6 +25,9 @@ public class LeastCommonMultiple implements Operation {
 
     @Override
     public double execute(Double l, Double r) {
+        if(l == 0 || r == 0 || l.equals(Double.NaN) || r.equals(Double.NaN)) {
+            return Double.NaN;
+        }
         return (l * r) / greatestCommonDivisor(l.longValue(), r.longValue());
     }
 
