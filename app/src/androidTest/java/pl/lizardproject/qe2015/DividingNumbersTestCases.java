@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import com.robotium.solo.Solo;
 
+import java.text.DecimalFormat;
+
 import pl.lizardproject.qe2015.Util.DisplayCondition;
 
 public class DividingNumbersTestCases extends ActivityInstrumentationTestCase2<MainActivity> {
@@ -47,7 +49,7 @@ public class DividingNumbersTestCases extends ActivityInstrumentationTestCase2<M
 
 	public void testDivideTwoByTwo() {
 		//Given
-		String expected = "2 / 2  = 1";
+		String expected = "1";
 
 		//When
 		solo.clickOnView(buttonTwo);
@@ -62,7 +64,7 @@ public class DividingNumbersTestCases extends ActivityInstrumentationTestCase2<M
 
 	public void testDivideThirtyFiveByFive() {
 		//Given
-		String expected = "35 / 5  = 7";
+		String expected = "7";
 
 		//When
 		solo.clickOnView(buttonThree);
@@ -78,14 +80,13 @@ public class DividingNumbersTestCases extends ActivityInstrumentationTestCase2<M
 
 	public void testDivideTwentyByTwoAndByFive() {
 		//Given
-		String expected = "20 / 2 / 5  = 2";
+		String expected = "2";
 
 		//When
 		solo.clickOnView(buttonTwo);
 		solo.clickOnView(buttonZero);
 		solo.clickOnView(buttonDiv);
 		solo.clickOnView(buttonTwo);
-		solo.clickOnView(buttonEqual);
 		solo.clickOnView(buttonDiv);
 		solo.clickOnView(buttonFive);
 		solo.clickOnView(buttonEqual);
@@ -97,7 +98,7 @@ public class DividingNumbersTestCases extends ActivityInstrumentationTestCase2<M
 
 	public void testDivideSevenByZero() {
 		//Given
-		String expected = "20 / 0  = inf";
+		String expected = DecimalFormat.getNumberInstance().format(Double.POSITIVE_INFINITY);
 
 		//When
 		solo.clickOnView(buttonSeven);

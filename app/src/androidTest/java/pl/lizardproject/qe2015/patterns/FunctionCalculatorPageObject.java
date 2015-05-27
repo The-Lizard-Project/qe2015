@@ -8,9 +8,9 @@ import com.robotium.solo.Solo;
 import pl.lizardproject.qe2015.R;
 import pl.lizardproject.qe2015.Util.DisplayCondition;
 
-public class PageObject {
+public class FunctionCalculatorPageObject {
 
-	private Solo solo;
+	private final Solo solo;
 
 	private final View buttonZero;
 	private final View buttonOne;
@@ -23,14 +23,14 @@ public class PageObject {
 	private final View buttonEight;
 	private final View buttonNine;
 
-	private final View buttonAdd;
-	private final View buttonSub;
-	private final View buttonMul;
-	private final View buttonDiv;
+	private final View buttonFib;
+	private final View buttonLcm;
+	private final View buttonPri;
+	private final View buttonGcd;
 	private final View buttonEqual;
 	private final TextView viewDisplay;
 
-	public PageObject(Solo solo) {
+	public FunctionCalculatorPageObject(Solo solo) {
 		this.solo = solo;
 
 		buttonZero = solo.getView(R.id.button0);
@@ -43,10 +43,10 @@ public class PageObject {
 		buttonSeven = solo.getView(R.id.button7);
 		buttonEight = solo.getView(R.id.button8);
 		buttonNine = solo.getView(R.id.button9);
-		buttonAdd = solo.getView(R.id.buttonAdd);
-		buttonSub = solo.getView(R.id.buttonSub);
-		buttonMul = solo.getView(R.id.buttonMul);
-		buttonDiv = solo.getView(R.id.buttonDiv);
+		buttonFib = solo.getView(R.id.buttonFib);
+		buttonLcm = solo.getView(R.id.buttonLcm);
+		buttonPri = solo.getView(R.id.buttonPri);
+		buttonGcd = solo.getView(R.id.buttonGcd);
 		buttonEqual = solo.getView(R.id.buttonEq);
 		viewDisplay = (TextView) solo.getView(R.id.calculatorViewPort);
 	}
@@ -91,20 +91,20 @@ public class PageObject {
 		solo.clickOnView(buttonNine);
 	}
 
-	public void clickAdd() {
-		solo.clickOnView(buttonAdd);
+	public void clickFibonacci() {
+		solo.clickOnView(buttonFib);
 	}
 
-	public void clickSubtract() {
-		solo.clickOnView(buttonSub);
+	public void clickLcm() {
+		solo.clickOnView(buttonLcm);
 	}
 
-	public void clickMultiply() {
-		solo.clickOnView(buttonMul);
+	public void clickPrime() {
+		solo.clickOnView(buttonPri);
 	}
 
-	public void clickDivide() {
-		solo.clickOnView(buttonDiv);
+	public void clickGcd() {
+		solo.clickOnView(buttonGcd);
 	}
 
 	public void clickEqual() {

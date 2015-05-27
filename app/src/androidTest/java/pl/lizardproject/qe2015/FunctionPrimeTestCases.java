@@ -8,21 +8,16 @@ import com.robotium.solo.Solo;
 
 import pl.lizardproject.qe2015.Util.DisplayCondition;
 
-public class AddingNumbersTestCases extends ActivityInstrumentationTestCase2<MainActivity> {
+public class FunctionPrimeTestCases extends ActivityInstrumentationTestCase2<MainActivity> {
 
 	private Solo solo;
-	private View buttonOne;
-	private View buttonTwo;
 	private View buttonThree;
 	private View buttonFour;
-	private View buttonFive;
-	private View buttonSeven;
-	private View buttonNine;
-	private View buttonAdd;
+	private View buttonPri;
 	private View buttonEqual;
 	private TextView viewDisplay;
 
-	public AddingNumbersTestCases() {
+	public FunctionPrimeTestCases() {
 		super(MainActivity.class);
 	}
 
@@ -32,47 +27,35 @@ public class AddingNumbersTestCases extends ActivityInstrumentationTestCase2<Mai
 		solo = new Solo(getInstrumentation(), getActivity());
 
 		//Given
-		buttonOne = solo.getView(R.id.button1);
-		buttonTwo = solo.getView(R.id.button2);
+		View buttonFunctions = solo.getView(R.id.functions);
+		solo.clickOnView(buttonFunctions);
+		solo.waitForActivity(ExtendedActivity.class, 2000);
+		solo.goBack();
+		solo.waitForActivity(MainActivity.class, 2000);
+		buttonFunctions = solo.getView(R.id.functions);
+		solo.clickOnView(buttonFunctions);
+		solo.waitForActivity(ExtendedActivity.class, 2000);
+
 		buttonThree = solo.getView(R.id.button3);
 		buttonFour = solo.getView(R.id.button4);
-		buttonFive = solo.getView(R.id.button5);
-		buttonSeven = solo.getView(R.id.button7);
-		buttonNine = solo.getView(R.id.button9);
-		buttonAdd = solo.getView(R.id.buttonAdd);
+		buttonPri = solo.getView(R.id.buttonPri);
 		buttonEqual = solo.getView(R.id.buttonEq);
 		viewDisplay = (TextView) solo.getView(R.id.calculatorViewPort);
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
+		solo.finishOpenedActivities();
 		super.tearDown();
 	}
 
-	public void testAddTwoAndTwo() {
+	public void testPrimeOfThree() {
 		//Given
-		String expected = "4";
-
-		//When
-		solo.clickOnView(buttonTwo);
-		solo.clickOnView(buttonAdd);
-		solo.clickOnView(buttonTwo);
-		solo.clickOnView(buttonEqual);
-
-		//Than
-		solo.waitForCondition(new DisplayCondition(viewDisplay, expected), 2000);
-		assertEquals(expected, viewDisplay.getText());
-	}
-
-	public void testAddThirtySevenAndFive() {
-		//Given
-		String expected = "42";
+		String expected = "1";
 
 		//When
 		solo.clickOnView(buttonThree);
-		solo.clickOnView(buttonSeven);
-		solo.clickOnView(buttonAdd);
-		solo.clickOnView(buttonFive);
+		solo.clickOnView(buttonPri);
 		solo.clickOnView(buttonEqual);
 
 		//Than
@@ -80,17 +63,13 @@ public class AddingNumbersTestCases extends ActivityInstrumentationTestCase2<Mai
 		assertEquals(expected, viewDisplay.getText());
 	}
 
-	public void testAddSeventeenAndFourAndNine() {
+	public void testPrimeOfFour() {
 		//Given
-		String expected = "30";
+		String expected = "0";
 
 		//When
-		solo.clickOnView(buttonOne);
-		solo.clickOnView(buttonSeven);
-		solo.clickOnView(buttonAdd);
 		solo.clickOnView(buttonFour);
-		solo.clickOnView(buttonAdd);
-		solo.clickOnView(buttonNine);
+		solo.clickOnView(buttonPri);
 		solo.clickOnView(buttonEqual);
 
 		//Than

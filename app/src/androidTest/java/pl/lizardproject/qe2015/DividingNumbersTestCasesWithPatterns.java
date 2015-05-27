@@ -6,11 +6,13 @@ import com.robotium.solo.Solo;
 
 import junit.framework.Assert;
 
-import pl.lizardproject.qe2015.patterns.PageObject;
+import java.text.DecimalFormat;
+
+import pl.lizardproject.qe2015.patterns.SimpleCalculatorPageObject;
 
 public class DividingNumbersTestCasesWithPatterns extends ActivityInstrumentationTestCase2<MainActivity> {
 
-	private PageObject pageObject;
+	private SimpleCalculatorPageObject pageObject;
 
 	public DividingNumbersTestCasesWithPatterns() {
 		super(MainActivity.class);
@@ -21,7 +23,7 @@ public class DividingNumbersTestCasesWithPatterns extends ActivityInstrumentatio
 		super.setUp();
 
 		//Given
-		pageObject = new PageObject(new Solo(getInstrumentation(), getActivity()));
+		pageObject = new SimpleCalculatorPageObject(new Solo(getInstrumentation(), getActivity()));
 	}
 
 	@Override
@@ -31,7 +33,7 @@ public class DividingNumbersTestCasesWithPatterns extends ActivityInstrumentatio
 
 	public void testDivideTwoByTwo() {
 		//Given
-		String expected = "2 / 2  = 1";
+		String expected = "1";
 
 		//When
 		pageObject.clickTwo();
@@ -46,7 +48,7 @@ public class DividingNumbersTestCasesWithPatterns extends ActivityInstrumentatio
 
 	public void testDivideThirtyFiveByFive() {
 		//Given
-		String expected = "35 / 5  = 7";
+		String expected = "7";
 
 		//When
 		pageObject.clickThree();
@@ -62,14 +64,13 @@ public class DividingNumbersTestCasesWithPatterns extends ActivityInstrumentatio
 
 	public void testDivideTwentyByTwoAndByFive() {
 		//Given
-		String expected = "20 / 2 / 5  = 2";
+		String expected = "2";
 
 		//When
 		pageObject.clickTwo();
 		pageObject.clickZero();
 		pageObject.clickDivide();
 		pageObject.clickTwo();
-		pageObject.clickEqual();
 		pageObject.clickDivide();
 		pageObject.clickFive();
 		pageObject.clickEqual();
@@ -81,7 +82,7 @@ public class DividingNumbersTestCasesWithPatterns extends ActivityInstrumentatio
 
 	public void testDivideSevenByZero() {
 		//Given
-		String expected = "20 / 0  = inf";
+		String expected = DecimalFormat.getNumberInstance().format(Double.POSITIVE_INFINITY);
 
 		//When
 		pageObject.clickSeven();

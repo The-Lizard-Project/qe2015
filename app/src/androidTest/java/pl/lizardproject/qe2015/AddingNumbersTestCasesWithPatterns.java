@@ -6,11 +6,11 @@ import com.robotium.solo.Solo;
 
 import junit.framework.Assert;
 
-import pl.lizardproject.qe2015.patterns.PageObject;
+import pl.lizardproject.qe2015.patterns.SimpleCalculatorPageObject;
 
 public class AddingNumbersTestCasesWithPatterns extends ActivityInstrumentationTestCase2<MainActivity> {
 
-	private PageObject pageObject;
+	private SimpleCalculatorPageObject pageObject;
 
 	public AddingNumbersTestCasesWithPatterns() {
 		super(MainActivity.class);
@@ -21,7 +21,7 @@ public class AddingNumbersTestCasesWithPatterns extends ActivityInstrumentationT
 		super.setUp();
 
 		//Given
-		pageObject = new PageObject(new Solo(getInstrumentation(), getActivity()));
+		pageObject = new SimpleCalculatorPageObject(new Solo(getInstrumentation(), getActivity()));
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class AddingNumbersTestCasesWithPatterns extends ActivityInstrumentationT
 
 	public void testAddTwoAndTwo() {
 		//Given
-		String expected = "2 + 2  = 4";
+		String expected = "4";
 
 		//When
 		pageObject.clickTwo();
@@ -46,7 +46,7 @@ public class AddingNumbersTestCasesWithPatterns extends ActivityInstrumentationT
 
 	public void testAddThirtySevenAndFive() {
 		//Given
-		String expected = "37 + 5  = 42";
+		String expected = "42";
 
 		//When
 		pageObject.clickThree();
@@ -62,14 +62,13 @@ public class AddingNumbersTestCasesWithPatterns extends ActivityInstrumentationT
 
 	public void testAddSeventeenAndFourAndNine() {
 		//Given
-		String expected = "17 + 4 + 9  = 30";
+		String expected = "30";
 
 		//When
 		pageObject.clickOne();
 		pageObject.clickSeven();
 		pageObject.clickAdd();
 		pageObject.clickFour();
-		pageObject.clickEqual();
 		pageObject.clickAdd();
 		pageObject.clickNine();
 		pageObject.clickEqual();
