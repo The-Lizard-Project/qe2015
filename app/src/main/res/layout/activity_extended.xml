@@ -163,7 +163,7 @@
             android:id="@+id/buttonLcm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NWW"/>
+            android:text="LCM"/>
 
         <Button
             android:id="@+id/buttonPri"
@@ -176,7 +176,7 @@
             android:id="@+id/buttonGcd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NWD"
+            android:text="GCD"
             />
     </LinearLayout>
 </LinearLayout>
