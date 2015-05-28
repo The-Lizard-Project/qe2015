@@ -6,6 +6,10 @@ public class Tree {
 
     public Node root;
 
+    public boolean isEmpty() {
+        return root == null;
+    }
+
     public void addOperation(Operation op) {
         addOperation(op, 0);
     }

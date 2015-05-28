@@ -36,12 +36,15 @@ public class EquationImpl implements Equation {
             pushToTree();
             cleanupState();
         }
+        if(tree.isEmpty() && !lBuilder.isValid()) {
+            addNumber(0d);
+        }
         this.operation = operation;
         printEquation();
     }
 
     private boolean correctOperation() {
-        return (lBuilder.isValid() && rBuilder.isValid() && operation != null) || tree.root != null && (rBuilder.isValid() && operation != null) || (operation != null && !operation.requiresBothArguments());
+        return (lBuilder.isValid() && rBuilder.isValid() && operation != null) || !tree.isEmpty() && (rBuilder.isValid() && operation != null) || (operation != null && !operation.requiresBothArguments());
     }
 
     @Override
@@ -88,7 +91,7 @@ public class EquationImpl implements Equation {
         } else {
             pushToTree();
         }
-        if(tree.root == null) {
+        if(tree.isEmpty()) {
             return 0d;
         }
         double calculated = tree.root.calculate();
