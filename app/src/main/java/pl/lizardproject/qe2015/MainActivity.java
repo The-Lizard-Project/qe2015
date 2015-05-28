@@ -123,7 +123,7 @@ public class MainActivity extends Activity implements PrintListener {
     @Optional
     @OnClick(R.id.functions)
     protected void buttonFunctionsClicked() {
-        startActivity(new Intent(this, ExtendedActivity.class));
+        startActivity(new Intent(this, FibonacciActivity.class));
     }
 
     @Override
