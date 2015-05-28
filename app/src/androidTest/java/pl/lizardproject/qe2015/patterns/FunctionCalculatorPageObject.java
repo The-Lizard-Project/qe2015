@@ -1,114 +1,56 @@
 package pl.lizardproject.qe2015.patterns;
 
+import android.app.Activity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.robotium.solo.Solo;
 
+import pl.lizardproject.qe2015.FibonacciActivity;
+import pl.lizardproject.qe2015.GcdActivity;
+import pl.lizardproject.qe2015.LcmActivity;
+import pl.lizardproject.qe2015.MainActivity;
+import pl.lizardproject.qe2015.PrimeActivity;
 import pl.lizardproject.qe2015.R;
 import pl.lizardproject.qe2015.Util.DisplayCondition;
+import pl.lizardproject.qe2015.patterns.contract.IFibonacciFunctionPageObject;
+import pl.lizardproject.qe2015.patterns.contract.IGcdFunctionPageObject;
+import pl.lizardproject.qe2015.patterns.contract.ILcmFunctionPageObject;
+import pl.lizardproject.qe2015.patterns.contract.IPrimeFunctionPageObject;
 
-public class FunctionCalculatorPageObject {
+public class FunctionCalculatorPageObject implements IFibonacciFunctionPageObject, IGcdFunctionPageObject, ILcmFunctionPageObject, IPrimeFunctionPageObject {
 
 	private final Solo solo;
 
-	private final View buttonZero;
-	private final View buttonOne;
-	private final View buttonTwo;
-	private final View buttonThree;
-	private final View buttonFour;
-	private final View buttonFive;
-	private final View buttonSix;
-	private final View buttonSeven;
-	private final View buttonEight;
-	private final View buttonNine;
-
-	private final View buttonFib;
-	private final View buttonLcm;
-	private final View buttonPri;
-	private final View buttonGcd;
-	private final View buttonEqual;
+	private final EditText viewFirstNumber;
+	private final EditText viewSecondNumber;
+	private final View buttonFunction;
 	private final TextView viewDisplay;
+	private final View buttonNextFunction;
+	private final View buttonPreviousFunction;
 
 	public FunctionCalculatorPageObject(Solo solo) {
 		this.solo = solo;
 
-		buttonZero = solo.getView(R.id.button0);
-		buttonOne = solo.getView(R.id.button1);
-		buttonTwo = solo.getView(R.id.button2);
-		buttonThree = solo.getView(R.id.button3);
-		buttonFour = solo.getView(R.id.button4);
-		buttonFive = solo.getView(R.id.button5);
-		buttonSix = solo.getView(R.id.button6);
-		buttonSeven = solo.getView(R.id.button7);
-		buttonEight = solo.getView(R.id.button8);
-		buttonNine = solo.getView(R.id.button9);
-		buttonFib = solo.getView(R.id.buttonFib);
-		buttonLcm = solo.getView(R.id.buttonLcm);
-		buttonPri = solo.getView(R.id.buttonPri);
-		buttonGcd = solo.getView(R.id.buttonGcd);
-		buttonEqual = solo.getView(R.id.buttonEq);
-		viewDisplay = (TextView) solo.getView(R.id.calculatorViewPort);
+		viewFirstNumber = (EditText) solo.getView(R.id.firstNumber);
+		viewSecondNumber = (EditText) solo.getView(R.id.secondNumber);
+		buttonFunction = solo.getView(R.id.function);
+		viewDisplay = (TextView) solo.getView(R.id.outcome);
+		buttonNextFunction = solo.getView(R.id.nextFunction);
+		buttonPreviousFunction = solo.getView(R.id.previousFunction);
 	}
 
-	public void clickZero() {
-		solo.clickOnView(buttonZero);
+	public void fillFirstNumber(String text) {
+		solo.typeText(viewFirstNumber, text);
 	}
 
-	public void clickOne() {
-		solo.clickOnView(buttonOne);
+	public void fillSecondNumber(String text) {
+		solo.typeText(viewSecondNumber, text);
 	}
 
-	public void clickTwo() {
-		solo.clickOnView(buttonTwo);
-	}
-
-	public void clickThree() {
-		solo.clickOnView(buttonThree);
-	}
-
-	public void clickFour() {
-		solo.clickOnView(buttonFour);
-	}
-
-	public void clickFive() {
-		solo.clickOnView(buttonFive);
-	}
-
-	public void clickSix() {
-		solo.clickOnView(buttonSix);
-	}
-
-	public void clickSeven() {
-		solo.clickOnView(buttonSeven);
-	}
-
-	public void clickEight() {
-		solo.clickOnView(buttonEight);
-	}
-
-	public void clickNine() {
-		solo.clickOnView(buttonNine);
-	}
-
-	public void clickFibonacci() {
-		solo.clickOnView(buttonFib);
-	}
-
-	public void clickLcm() {
-		solo.clickOnView(buttonLcm);
-	}
-
-	public void clickPrime() {
-		solo.clickOnView(buttonPri);
-	}
-
-	public void clickGcd() {
-		solo.clickOnView(buttonGcd);
-	}
-
-	public void clickEqual() {
-		solo.clickOnView(buttonEqual);
+	public void clickFunction() {
+		solo.clickOnView(buttonFunction);
 	}
 
 	public boolean waitForResult(String expected) {
@@ -117,5 +59,81 @@ public class FunctionCalculatorPageObject {
 
 	public String getDisplayedResult() {
 		return viewDisplay.getText().toString();
+	}
+
+	public IGcdFunctionPageObject goToGcdFunctionsActivity() {
+		goTo(GcdActivity.class, buttonNextFunction);
+
+		return new FunctionCalculatorPageObject(solo);
+	}
+
+	public ILcmFunctionPageObject goToLcmFunctionsActivity() {
+		goTo(LcmActivity.class, buttonNextFunction);
+
+		return new FunctionCalculatorPageObject(solo);
+	}
+
+	public IPrimeFunctionPageObject goToPrimeFunctionsActivity() {
+		goTo(PrimeActivity.class, buttonNextFunction);
+
+		return new FunctionCalculatorPageObject(solo);
+	}
+
+	public SimpleCalculatorPageObject goBackToSimpleCalculatorActivity() {
+		goTo(FibonacciActivity.class, buttonPreviousFunction);
+
+		return new SimpleCalculatorPageObject(solo);
+	}
+
+	public IFibonacciFunctionPageObject goBackToFibonacciFunctionsActivity() {
+		goTo(FibonacciActivity.class, buttonPreviousFunction);
+
+		return new FunctionCalculatorPageObject(solo);
+	}
+
+	public IGcdFunctionPageObject goBackToGcdFunctionsActivity() {
+		goTo(GcdActivity.class, buttonPreviousFunction);
+
+		return new FunctionCalculatorPageObject(solo);
+	}
+
+	public ILcmFunctionPageObject goBackToLcmFunctionsActivity() {
+		goTo(LcmActivity.class, buttonPreviousFunction);
+
+		return new FunctionCalculatorPageObject(solo);
+	}
+
+	public SimpleCalculatorPageObject goBackByBackButtonToSimpleCalculatorActivity() {
+		goBackByBackButton(MainActivity.class);
+
+		return new SimpleCalculatorPageObject(solo);
+	}
+
+	public IFibonacciFunctionPageObject goBackByBackButtonToFibonacciFunctionsActivity() {
+		goBackByBackButton(FibonacciActivity.class);
+
+		return new FunctionCalculatorPageObject(solo);
+	}
+
+	public IGcdFunctionPageObject goBackByBackButtonToGcdFunctionsActivity() {
+		goBackByBackButton(GcdActivity.class);
+
+		return new FunctionCalculatorPageObject(solo);
+	}
+
+	public ILcmFunctionPageObject goBackByBackButtonToLcmFunctionsActivity() {
+		goBackByBackButton(LcmActivity.class);
+
+		return new FunctionCalculatorPageObject(solo);
+	}
+
+	private void goTo(Class<? extends Activity> activityClass, View button) {
+		solo.clickOnView(button);
+		solo.waitForActivity(activityClass, 2000);
+	}
+
+	private void goBackByBackButton(Class<? extends Activity> activityClass) {
+		solo.goBack();
+		solo.waitForActivity(activityClass, 2000);
 	}
 }

@@ -6,13 +6,13 @@ import com.robotium.solo.Solo;
 
 import junit.framework.Assert;
 
-import pl.lizardproject.qe2015.patterns.FunctionCalculatorPageObject;
-import pl.lizardproject.qe2015.patterns.NavigationPageObject;
+import pl.lizardproject.qe2015.patterns.contract.IPrimeFunctionPageObject;
+import pl.lizardproject.qe2015.patterns.SimpleCalculatorPageObject;
 
 public class FunctionPrimeTestCasesWithPatterns extends ActivityInstrumentationTestCase2<MainActivity> {
 
-	private FunctionCalculatorPageObject functionsPageObject;
-	private NavigationPageObject transporter;
+	private IPrimeFunctionPageObject functionsPageObject;
+	private Solo solo;
 
 	public FunctionPrimeTestCasesWithPatterns() {
 		super(MainActivity.class);
@@ -21,28 +21,29 @@ public class FunctionPrimeTestCasesWithPatterns extends ActivityInstrumentationT
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		solo = new Solo(getInstrumentation(), getActivity());
 
 		//Given
-		transporter = new NavigationPageObject(new Solo(getInstrumentation(), getActivity()));
-		transporter.goToFunctionsActivity();
-		transporter.goBackFromFunctionsActivity();
-		functionsPageObject = transporter.goToFunctionsActivity();
+		functionsPageObject = new SimpleCalculatorPageObject(solo).
+				goToFibonacciFunctionsActivity().
+				goToGcdFunctionsActivity().
+				goToLcmFunctionsActivity().
+				goToPrimeFunctionsActivity();
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
-		transporter.finishOpenedActivities();
+		solo.finishOpenedActivities();
 		super.tearDown();
 	}
 
 	public void testPrimeOfThree() {
 		//Given
-		String expected = "1";
+		String expected = "Prime";
 
 		//When
-		functionsPageObject.clickThree();
-		functionsPageObject.clickPrime();
-		functionsPageObject.clickEqual();
+		functionsPageObject.fillFirstNumber("3");
+		functionsPageObject.clickFunction();
 
 		//Than
 		functionsPageObject.waitForResult(expected);
@@ -51,12 +52,11 @@ public class FunctionPrimeTestCasesWithPatterns extends ActivityInstrumentationT
 
 	public void testPrimeOfFour() {
 		//Given
-		String expected = "0";
+		String expected = "Not prime";
 
 		//When
-		functionsPageObject.clickFour();
-		functionsPageObject.clickPrime();
-		functionsPageObject.clickEqual();
+		functionsPageObject.fillFirstNumber("4");
+		functionsPageObject.clickFunction();
 
 		//Than
 		functionsPageObject.waitForResult(expected);

@@ -2,6 +2,7 @@ package pl.lizardproject.qe2015;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.robotium.solo.Solo;
@@ -11,10 +12,8 @@ import pl.lizardproject.qe2015.Util.DisplayCondition;
 public class FunctionPrimeTestCases extends ActivityInstrumentationTestCase2<MainActivity> {
 
 	private Solo solo;
-	private View buttonThree;
-	private View buttonFour;
-	private View buttonPri;
-	private View buttonEqual;
+	private EditText viewFirstNumber;
+	private View buttonFunction;
 	private TextView viewDisplay;
 
 	public FunctionPrimeTestCases() {
@@ -29,18 +28,20 @@ public class FunctionPrimeTestCases extends ActivityInstrumentationTestCase2<Mai
 		//Given
 		View buttonFunctions = solo.getView(R.id.functions);
 		solo.clickOnView(buttonFunctions);
-		solo.waitForActivity(ExtendedActivity.class, 2000);
-		solo.goBack();
-		solo.waitForActivity(MainActivity.class, 2000);
-		buttonFunctions = solo.getView(R.id.functions);
-		solo.clickOnView(buttonFunctions);
-		solo.waitForActivity(ExtendedActivity.class, 2000);
+		solo.waitForActivity(FibonacciActivity.class, 2000);
+		View buttonNextFunction = solo.getView(R.id.nextFunction);
+		solo.clickOnView(buttonNextFunction);
+		solo.waitForActivity(GcdActivity.class, 2000);
+		buttonNextFunction = solo.getView(R.id.nextFunction);
+		solo.clickOnView(buttonNextFunction);
+		solo.waitForActivity(LcmActivity.class, 2000);
+		buttonNextFunction = solo.getView(R.id.nextFunction);
+		solo.clickOnView(buttonNextFunction);
+		solo.waitForActivity(PrimeActivity.class, 2000);
 
-		buttonThree = solo.getView(R.id.button3);
-		buttonFour = solo.getView(R.id.button4);
-		buttonPri = solo.getView(R.id.buttonPri);
-		buttonEqual = solo.getView(R.id.buttonEq);
-		viewDisplay = (TextView) solo.getView(R.id.calculatorViewPort);
+		viewFirstNumber = (EditText) solo.getView(R.id.firstNumber);
+		buttonFunction = solo.getView(R.id.function);
+		viewDisplay = (TextView) solo.getView(R.id.outcome);
 	}
 
 	@Override
@@ -51,12 +52,11 @@ public class FunctionPrimeTestCases extends ActivityInstrumentationTestCase2<Mai
 
 	public void testPrimeOfThree() {
 		//Given
-		String expected = "1";
+		String expected = "Prime";
 
 		//When
-		solo.clickOnView(buttonThree);
-		solo.clickOnView(buttonPri);
-		solo.clickOnView(buttonEqual);
+		solo.typeText(viewFirstNumber, "3");
+		solo.clickOnView(buttonFunction);
 
 		//Than
 		solo.waitForCondition(new DisplayCondition(viewDisplay, expected), 2000);
@@ -65,12 +65,11 @@ public class FunctionPrimeTestCases extends ActivityInstrumentationTestCase2<Mai
 
 	public void testPrimeOfFour() {
 		//Given
-		String expected = "0";
+		String expected = "Not prime";
 
 		//When
-		solo.clickOnView(buttonFour);
-		solo.clickOnView(buttonPri);
-		solo.clickOnView(buttonEqual);
+		solo.typeText(viewFirstNumber, "4");
+		solo.clickOnView(buttonFunction);
 
 		//Than
 		solo.waitForCondition(new DisplayCondition(viewDisplay, expected), 2000);

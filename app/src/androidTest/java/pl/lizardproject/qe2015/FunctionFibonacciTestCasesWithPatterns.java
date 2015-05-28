@@ -6,13 +6,13 @@ import com.robotium.solo.Solo;
 
 import junit.framework.Assert;
 
-import pl.lizardproject.qe2015.patterns.FunctionCalculatorPageObject;
-import pl.lizardproject.qe2015.patterns.NavigationPageObject;
+import pl.lizardproject.qe2015.patterns.SimpleCalculatorPageObject;
+import pl.lizardproject.qe2015.patterns.contract.IFibonacciFunctionPageObject;
 
 public class FunctionFibonacciTestCasesWithPatterns extends ActivityInstrumentationTestCase2<MainActivity> {
 
-	private FunctionCalculatorPageObject functionsPageObject;
-	private NavigationPageObject transporter;
+	private IFibonacciFunctionPageObject functionsPageObject;
+	private Solo solo;
 
 	public FunctionFibonacciTestCasesWithPatterns() {
 		super(MainActivity.class);
@@ -21,17 +21,16 @@ public class FunctionFibonacciTestCasesWithPatterns extends ActivityInstrumentat
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		solo = new Solo(getInstrumentation(), getActivity());
 
 		//Given
-		transporter = new NavigationPageObject(new Solo(getInstrumentation(), getActivity()));
-		transporter.goToFunctionsActivity();
-		transporter.goBackFromFunctionsActivity();
-		functionsPageObject = transporter.goToFunctionsActivity();
+		functionsPageObject = new SimpleCalculatorPageObject(solo).
+				goToFibonacciFunctionsActivity();
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
-		transporter.finishOpenedActivities();
+		solo.finishOpenedActivities();
 		super.tearDown();
 	}
 
@@ -40,9 +39,8 @@ public class FunctionFibonacciTestCasesWithPatterns extends ActivityInstrumentat
 		String expected = "13";
 
 		//When
-		functionsPageObject.clickSeven();
-		functionsPageObject.clickFibonacci();
-		functionsPageObject.clickEqual();
+		functionsPageObject.fillFirstNumber("7");
+		functionsPageObject.clickFunction();
 
 		//Than
 		functionsPageObject.waitForResult(expected);
@@ -54,9 +52,8 @@ public class FunctionFibonacciTestCasesWithPatterns extends ActivityInstrumentat
 		String expected = "34";
 
 		//When
-		functionsPageObject.clickNine();
-		functionsPageObject.clickFibonacci();
-		functionsPageObject.clickEqual();
+		functionsPageObject.fillFirstNumber("9");
+		functionsPageObject.clickFunction();
 
 		//Than
 		functionsPageObject.waitForResult(expected);

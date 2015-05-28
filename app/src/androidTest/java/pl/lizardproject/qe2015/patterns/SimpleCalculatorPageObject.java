@@ -6,8 +6,10 @@ import android.widget.TextView;
 
 import com.robotium.solo.Solo;
 
+import pl.lizardproject.qe2015.FibonacciActivity;
 import pl.lizardproject.qe2015.R;
 import pl.lizardproject.qe2015.Util.DisplayCondition;
+import pl.lizardproject.qe2015.patterns.contract.IFibonacciFunctionPageObject;
 
 public class SimpleCalculatorPageObject {
 
@@ -112,6 +114,13 @@ public class SimpleCalculatorPageObject {
 
 	public void clickEqual() {
 		solo.clickOnView(buttonEqual);
+	}
+
+	public IFibonacciFunctionPageObject goToFibonacciFunctionsActivity() {
+		solo.clickOnView(buttonFunctions);
+		solo.waitForActivity(FibonacciActivity.class, 2000);
+
+		return new FunctionCalculatorPageObject(solo);
 	}
 
 	public boolean waitForResult(String expected) {
