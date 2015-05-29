@@ -12,6 +12,8 @@ public class LcmActivity extends FunctionActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         functionButton.setText("Least common multiple");
+        previousFunctionButton.setText("Gcd");
+        nextFunctionButton.setText("Prime");
     }
 
     @Override
@@ -22,7 +24,7 @@ public class LcmActivity extends FunctionActivity {
             equation.addNumber(getSecondNumber());
             final Double evaluate = equation.evaluate();
             outcome.setText(TreePrinter.df.format(evaluate));
-        } catch(NumberFormatException ignored) {
+        } catch (NumberFormatException ignored) {
             equation.clear();
         }
     }

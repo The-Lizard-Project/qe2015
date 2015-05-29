@@ -13,6 +13,7 @@ public class PrimeActivity extends FunctionActivity {
         secondNumber.setVisibility(View.GONE);
         nextFunctionButton.setVisibility(View.GONE);
         functionButton.setText("Prime");
+        previousFunctionButton.setText("Lcm");
     }
 
     @Override
@@ -22,7 +23,7 @@ public class PrimeActivity extends FunctionActivity {
             equation.addOperation(new Prime());
             final Double evaluate = equation.evaluate();
             outcome.setText((evaluate.longValue() == 0) ? "Not prime" : "Prime");
-        } catch(NumberFormatException ignored) {
+        } catch (NumberFormatException ignored) {
             equation.clear();
         }
     }

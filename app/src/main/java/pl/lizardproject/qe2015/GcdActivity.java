@@ -12,6 +12,8 @@ public class GcdActivity extends FunctionActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         functionButton.setText("Greatest common denominator");
+        previousFunctionButton.setText("Fibonacci");
+        nextFunctionButton.setText("Lcm");
     }
 
     @Override
@@ -22,7 +24,7 @@ public class GcdActivity extends FunctionActivity {
             equation.addNumber(getSecondNumber());
             final Double evaluate = equation.evaluate();
             outcome.setText(TreePrinter.df.format(evaluate));
-        } catch(NumberFormatException ignored) {
+        } catch (NumberFormatException ignored) {
             equation.clear();
         }
     }

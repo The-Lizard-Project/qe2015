@@ -16,6 +16,7 @@ public class FibonacciActivity extends FunctionActivity {
         secondNumber.setVisibility(View.GONE);
         functionButton.setText("Fibonacci");
         previousFunctionButton.setText("Regular calculator");
+        nextFunctionButton.setText("Gcd");
     }
 
     @Override
@@ -25,7 +26,7 @@ public class FibonacciActivity extends FunctionActivity {
             equation.addOperation(new Fibonacci());
             final Double evaluate = equation.evaluate();
             outcome.setText(TreePrinter.df.format(evaluate));
-        } catch(NumberFormatException ignored) {
+        } catch (NumberFormatException ignored) {
             equation.clear();
         }
     }
