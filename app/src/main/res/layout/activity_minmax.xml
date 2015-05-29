@@ -15,9 +15,9 @@
         android:layout_above="@+id/function"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:digits="0123456789.,$"
+        android:digits="0123456789,"
         android:hint="Comma separated list of numbers"
-        android:inputType="numberDecimal"
+        android:inputType="number"
         android:nextFocusForward="@+id/function"
         android:nextFocusRight="@+id/function" />
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +24,7 @@ public class MinMaxActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_minimum);
+        setContentView(R.layout.activity_minmax);
         ButterKnife.inject(this);
     }
 
@@ -33,8 +34,12 @@ public class MinMaxActivity extends Activity {
         final List<Double> integers;
         if (!numberListString.isEmpty()) {
             integers = NumberListParser.parseList(numberListString, ",");
-            final Double min = Collections.min(integers);
-            outcome.setText(TreePrinter.df.format(min));
+            if (integers.size() > 0) {
+                final Double min = Collections.min(integers);
+                outcome.setText(TreePrinter.df.format(min));
+            } else {
+                Toast.makeText(this, "Incorrect format of number list", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -44,8 +49,12 @@ public class MinMaxActivity extends Activity {
         final List<Double> integers;
         if (!numberListString.isEmpty()) {
             integers = NumberListParser.parseList(numberListString, ",");
-            final Double max = Collections.max(integers);
-            outcome.setText(TreePrinter.df.format(max));
+            if (integers.size() > 0) {
+                final Double max = Collections.max(integers);
+                outcome.setText(TreePrinter.df.format(max));
+            } else {
+                Toast.makeText(this, "Incorrect format of number list", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
