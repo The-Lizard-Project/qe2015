@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import pl.lizardproject.qe2015.calc.structure.TreePrinter;
+import pl.lizardproject.qe2015.calc.util.NumberListParser;
 
 public class MinMaxActivity extends Activity {
 

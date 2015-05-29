@@ -31,6 +31,10 @@ public class MinMaxCalculatorPageObject {
         buttonPreviousFunction = solo.getView(R.id.previousFunction);
     }
 
+    public TextView getViewDisplay() {
+        return viewDisplay;
+    }
+
     public void fillNumberList(String text) {
         solo.typeText(numberList, text);
     }
@@ -46,7 +50,6 @@ public class MinMaxCalculatorPageObject {
     public IFibonacciFunctionPageObject goBackToPrimeFunctionsActivity() {
         solo.clickOnView(buttonPreviousFunction);
         solo.waitForActivity(FibonacciActivity.class, 2000);
-
         return new FunctionCalculatorPageObject(solo);
     }
 

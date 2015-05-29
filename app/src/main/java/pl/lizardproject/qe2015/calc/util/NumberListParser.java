@@ -1,4 +1,4 @@
-package pl.lizardproject.qe2015;
+package pl.lizardproject.qe2015.calc.util;
 
 import java.util.ArrayList;
 import java.util.List;
