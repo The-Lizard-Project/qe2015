@@ -1,7 +1,6 @@
 package pl.lizardproject.qe2015;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,6 +11,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import pl.lizardproject.qe2015.calc.structure.TreePrinter;
 
 public class MinimumActivity extends Activity {
 
@@ -28,14 +28,25 @@ public class MinimumActivity extends Activity {
         ButterKnife.inject(this);
     }
 
-    @OnClick(R.id.function)
-    protected void functionClicked() {
+    @OnClick(R.id.min)
+    protected void minClicked() {
         final String numberListString = numberList.getText().toString();
-        final List<Integer> integers;
-        if(!numberListString.isEmpty()) {
+        final List<Double> integers;
+        if (!numberListString.isEmpty()) {
             integers = NumberListParser.parseList(numberListString, ",");
-            final Integer min = Collections.min(integers);
-            outcome.setText(min.toString());
+            final Double min = Collections.min(integers);
+            outcome.setText(TreePrinter.df.format(min));
+        }
+    }
+
+    @OnClick(R.id.max)
+    protected void maxClicked() {
+        final String numberListString = numberList.getText().toString();
+        final List<Double> integers;
+        if (!numberListString.isEmpty()) {
+            integers = NumberListParser.parseList(numberListString, ",");
+            final Double max = Collections.max(integers);
+            outcome.setText(TreePrinter.df.format(max));
         }
     }
 
@@ -43,10 +54,4 @@ public class MinimumActivity extends Activity {
     protected void previousButtonClicked() {
         onBackPressed();
     }
-
-    @OnClick(R.id.nextFunction)
-    protected void nextButtonClicked() {
-        startActivity(new Intent(this, MaximumActivity.class));
-    }
-
 }

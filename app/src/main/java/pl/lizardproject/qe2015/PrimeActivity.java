@@ -14,6 +14,7 @@ public class PrimeActivity extends FunctionActivity {
         secondNumber.setVisibility(View.GONE);
         functionButton.setText("Prime");
         previousFunctionButton.setText("Lcm");
+        nextFunctionButton.setText("Min/Max");
     }
 
     @Override
@@ -35,6 +36,6 @@ public class PrimeActivity extends FunctionActivity {
 
     @Override
     protected void nextFunctionButtonClicked() {
-        startActivity(new Intent(this, MaximumActivity.class));
+        startActivity(new Intent(this, MinimumActivity.class));
     }
 }
