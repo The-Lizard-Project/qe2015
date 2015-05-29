@@ -36,6 +36,6 @@ public class PrimeActivity extends FunctionActivity {
 
     @Override
     protected void nextFunctionButtonClicked() {
-        startActivity(new Intent(this, MinimumActivity.class));
+        startActivity(new Intent(this, MinMaxActivity.class));
     }
 }

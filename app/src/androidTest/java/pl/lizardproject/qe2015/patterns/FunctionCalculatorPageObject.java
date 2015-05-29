@@ -11,6 +11,7 @@ import pl.lizardproject.qe2015.FibonacciActivity;
 import pl.lizardproject.qe2015.GcdActivity;
 import pl.lizardproject.qe2015.LcmActivity;
 import pl.lizardproject.qe2015.MainActivity;
+import pl.lizardproject.qe2015.MinMaxActivity;
 import pl.lizardproject.qe2015.PrimeActivity;
 import pl.lizardproject.qe2015.R;
 import pl.lizardproject.qe2015.Util.DisplayCondition;
@@ -21,119 +22,125 @@ import pl.lizardproject.qe2015.patterns.contract.IPrimeFunctionPageObject;
 
 public class FunctionCalculatorPageObject implements IFibonacciFunctionPageObject, IGcdFunctionPageObject, ILcmFunctionPageObject, IPrimeFunctionPageObject {
 
-	private final Solo solo;
+    private final Solo solo;
 
-	private final EditText viewFirstNumber;
-	private final EditText viewSecondNumber;
-	private final View buttonFunction;
-	private final TextView viewDisplay;
-	private final View buttonNextFunction;
-	private final View buttonPreviousFunction;
+    private final EditText viewFirstNumber;
+    private final EditText viewSecondNumber;
+    private final View buttonFunction;
+    private final TextView viewDisplay;
+    private final View buttonNextFunction;
+    private final View buttonPreviousFunction;
 
-	public FunctionCalculatorPageObject(Solo solo) {
-		this.solo = solo;
+    public FunctionCalculatorPageObject(Solo solo) {
+        this.solo = solo;
 
-		viewFirstNumber = (EditText) solo.getView(R.id.firstNumber);
-		viewSecondNumber = (EditText) solo.getView(R.id.secondNumber);
-		buttonFunction = solo.getView(R.id.function);
-		viewDisplay = (TextView) solo.getView(R.id.outcome);
-		buttonNextFunction = solo.getView(R.id.nextFunction);
-		buttonPreviousFunction = solo.getView(R.id.previousFunction);
-	}
+        viewFirstNumber = (EditText) solo.getView(R.id.firstNumber);
+        viewSecondNumber = (EditText) solo.getView(R.id.secondNumber);
+        buttonFunction = solo.getView(R.id.function);
+        viewDisplay = (TextView) solo.getView(R.id.outcome);
+        buttonNextFunction = solo.getView(R.id.nextFunction);
+        buttonPreviousFunction = solo.getView(R.id.previousFunction);
+    }
 
-	public void fillFirstNumber(String text) {
-		solo.typeText(viewFirstNumber, text);
-	}
+    public void fillFirstNumber(String text) {
+        solo.typeText(viewFirstNumber, text);
+    }
 
-	public void fillSecondNumber(String text) {
-		solo.typeText(viewSecondNumber, text);
-	}
+    public void fillSecondNumber(String text) {
+        solo.typeText(viewSecondNumber, text);
+    }
 
-	public void clickFunction() {
-		solo.clickOnView(buttonFunction);
-	}
+    public void clickFunction() {
+        solo.clickOnView(buttonFunction);
+    }
 
-	public boolean waitForResult(String expected) {
-		return solo.waitForCondition(new DisplayCondition(viewDisplay, expected), 2000);
-	}
+    public boolean waitForResult(String expected) {
+        return solo.waitForCondition(new DisplayCondition(viewDisplay, expected), 2000);
+    }
 
-	public String getDisplayedResult() {
-		return viewDisplay.getText().toString();
-	}
+    public String getDisplayedResult() {
+        return viewDisplay.getText().toString();
+    }
 
-	public IGcdFunctionPageObject goToGcdFunctionsActivity() {
-		goTo(GcdActivity.class, buttonNextFunction);
+    public IGcdFunctionPageObject goToGcdFunctionsActivity() {
+        goTo(GcdActivity.class, buttonNextFunction);
 
-		return new FunctionCalculatorPageObject(solo);
-	}
+        return new FunctionCalculatorPageObject(solo);
+    }
 
-	public ILcmFunctionPageObject goToLcmFunctionsActivity() {
-		goTo(LcmActivity.class, buttonNextFunction);
+    public ILcmFunctionPageObject goToLcmFunctionsActivity() {
+        goTo(LcmActivity.class, buttonNextFunction);
 
-		return new FunctionCalculatorPageObject(solo);
-	}
+        return new FunctionCalculatorPageObject(solo);
+    }
 
-	public IPrimeFunctionPageObject goToPrimeFunctionsActivity() {
-		goTo(PrimeActivity.class, buttonNextFunction);
+    public IPrimeFunctionPageObject goToPrimeFunctionsActivity() {
+        goTo(PrimeActivity.class, buttonNextFunction);
 
-		return new FunctionCalculatorPageObject(solo);
-	}
+        return new FunctionCalculatorPageObject(solo);
+    }
 
-	public SimpleCalculatorPageObject goBackToSimpleCalculatorActivity() {
-		goTo(FibonacciActivity.class, buttonPreviousFunction);
+    public MinMaxCalculatorPageObject goToMinMaxFunctionsActivity() {
+        goTo(MinMaxActivity.class, buttonNextFunction);
 
-		return new SimpleCalculatorPageObject(solo);
-	}
+        return new MinMaxCalculatorPageObject(solo);
+    }
 
-	public IFibonacciFunctionPageObject goBackToFibonacciFunctionsActivity() {
-		goTo(FibonacciActivity.class, buttonPreviousFunction);
+    public SimpleCalculatorPageObject goBackToSimpleCalculatorActivity() {
+        goTo(FibonacciActivity.class, buttonPreviousFunction);
 
-		return new FunctionCalculatorPageObject(solo);
-	}
+        return new SimpleCalculatorPageObject(solo);
+    }
 
-	public IGcdFunctionPageObject goBackToGcdFunctionsActivity() {
-		goTo(GcdActivity.class, buttonPreviousFunction);
+    public IFibonacciFunctionPageObject goBackToFibonacciFunctionsActivity() {
+        goTo(FibonacciActivity.class, buttonPreviousFunction);
 
-		return new FunctionCalculatorPageObject(solo);
-	}
+        return new FunctionCalculatorPageObject(solo);
+    }
 
-	public ILcmFunctionPageObject goBackToLcmFunctionsActivity() {
-		goTo(LcmActivity.class, buttonPreviousFunction);
+    public IGcdFunctionPageObject goBackToGcdFunctionsActivity() {
+        goTo(GcdActivity.class, buttonPreviousFunction);
 
-		return new FunctionCalculatorPageObject(solo);
-	}
+        return new FunctionCalculatorPageObject(solo);
+    }
 
-	public SimpleCalculatorPageObject goBackByBackButtonToSimpleCalculatorActivity() {
-		goBackByBackButton(MainActivity.class);
+    public ILcmFunctionPageObject goBackToLcmFunctionsActivity() {
+        goTo(LcmActivity.class, buttonPreviousFunction);
 
-		return new SimpleCalculatorPageObject(solo);
-	}
+        return new FunctionCalculatorPageObject(solo);
+    }
 
-	public IFibonacciFunctionPageObject goBackByBackButtonToFibonacciFunctionsActivity() {
-		goBackByBackButton(FibonacciActivity.class);
+    public SimpleCalculatorPageObject goBackByBackButtonToSimpleCalculatorActivity() {
+        goBackByBackButton(MainActivity.class);
 
-		return new FunctionCalculatorPageObject(solo);
-	}
+        return new SimpleCalculatorPageObject(solo);
+    }
 
-	public IGcdFunctionPageObject goBackByBackButtonToGcdFunctionsActivity() {
-		goBackByBackButton(GcdActivity.class);
+    public IFibonacciFunctionPageObject goBackByBackButtonToFibonacciFunctionsActivity() {
+        goBackByBackButton(FibonacciActivity.class);
 
-		return new FunctionCalculatorPageObject(solo);
-	}
+        return new FunctionCalculatorPageObject(solo);
+    }
 
-	public ILcmFunctionPageObject goBackByBackButtonToLcmFunctionsActivity() {
-		goBackByBackButton(LcmActivity.class);
+    public IGcdFunctionPageObject goBackByBackButtonToGcdFunctionsActivity() {
+        goBackByBackButton(GcdActivity.class);
 
-		return new FunctionCalculatorPageObject(solo);
-	}
+        return new FunctionCalculatorPageObject(solo);
+    }
 
-	private void goTo(Class<? extends Activity> activityClass, View button) {
-		solo.clickOnView(button);
-		solo.waitForActivity(activityClass, 2000);
-	}
+    public ILcmFunctionPageObject goBackByBackButtonToLcmFunctionsActivity() {
+        goBackByBackButton(LcmActivity.class);
 
-	private void goBackByBackButton(Class<? extends Activity> activityClass) {
-		solo.goBack();
-		solo.waitForActivity(activityClass, 2000);
-	}
+        return new FunctionCalculatorPageObject(solo);
+    }
+
+    private void goTo(Class<? extends Activity> activityClass, View button) {
+        solo.clickOnView(button);
+        solo.waitForActivity(activityClass, 2000);
+    }
+
+    private void goBackByBackButton(Class<? extends Activity> activityClass) {
+        solo.goBack();
+        solo.waitForActivity(activityClass, 2000);
+    }
 }

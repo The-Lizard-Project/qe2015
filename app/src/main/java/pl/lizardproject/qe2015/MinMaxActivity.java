@@ -13,13 +13,12 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import pl.lizardproject.qe2015.calc.structure.TreePrinter;
 
-public class MinimumActivity extends Activity {
+public class MinMaxActivity extends Activity {
 
     @InjectView(R.id.numberList)
     protected EditText numberList;
     @InjectView(R.id.outcome)
     protected TextView outcome;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,16 +1,20 @@
 package pl.lizardproject.qe2015.patterns.contract;
 
+import pl.lizardproject.qe2015.patterns.MinMaxCalculatorPageObject;
+
 public interface IPrimeFunctionPageObject {
 
-	void fillFirstNumber(String text);
+    void fillFirstNumber(String text);
 
-	void clickFunction();
+    void clickFunction();
 
-	boolean waitForResult(String expected);
+    boolean waitForResult(String expected);
 
-	String getDisplayedResult();
+    String getDisplayedResult();
 
-	ILcmFunctionPageObject goBackToLcmFunctionsActivity();
+    MinMaxCalculatorPageObject goToMinMaxFunctionsActivity();
 
-	ILcmFunctionPageObject goBackByBackButtonToLcmFunctionsActivity();
+    ILcmFunctionPageObject goBackToLcmFunctionsActivity();
+
+    ILcmFunctionPageObject goBackByBackButtonToLcmFunctionsActivity();
 }

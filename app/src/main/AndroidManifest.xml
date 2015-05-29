@@ -33,7 +33,7 @@
             android:name=".PrimeActivity"
             android:label="@string/title_activity_prime"></activity>
         <activity
-            android:name=".MinimumActivity"
+            android:name=".MinMaxActivity"
             android:label="@string/title_activity_minimum"></activity>
     </application>
 </manifest>
