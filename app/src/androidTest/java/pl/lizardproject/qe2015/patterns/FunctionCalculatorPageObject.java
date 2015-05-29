@@ -42,6 +42,10 @@ public class FunctionCalculatorPageObject implements IFibonacciFunctionPageObjec
         buttonPreviousFunction = solo.getView(R.id.previousFunction);
     }
 
+    public TextView getViewDisplay() {
+        return viewDisplay;
+    }
+
     public void fillFirstNumber(String text) {
         solo.typeText(viewFirstNumber, text);
     }

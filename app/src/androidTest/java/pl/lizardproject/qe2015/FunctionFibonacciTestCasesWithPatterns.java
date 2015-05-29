@@ -42,8 +42,7 @@ public class FunctionFibonacciTestCasesWithPatterns extends ActivityInstrumentat
         functionsPageObject.clickFunction();
 
         //Then
-        functionsPageObject.waitForResult(expected);
-        Assert.assertEquals(expected, functionsPageObject.getDisplayedResult());
+        qeAsserts.assertThatViewEqualsText(pageObject.getViewDisplay(), expected);
     }
 
     public void testFibonacciOfNine() {
@@ -55,7 +54,6 @@ public class FunctionFibonacciTestCasesWithPatterns extends ActivityInstrumentat
         functionsPageObject.clickFunction();
 
         //Then
-        functionsPageObject.waitForResult(expected);
-        Assert.assertEquals(expected, functionsPageObject.getDisplayedResult());
+        qeAsserts.assertThatViewEqualsText(pageObject.getViewDisplay(), expected);
     }
 }
