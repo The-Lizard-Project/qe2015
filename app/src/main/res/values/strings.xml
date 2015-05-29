@@ -8,4 +8,6 @@
     <string name="title_activity_gcd">GcdActivity</string>
     <string name="title_activity_lcm">LcmActivity</string>
     <string name="title_activity_prime">PrimeActivity</string>
+    <string name="title_activity_minimum">MinimumActivity</string>
+    <string name="title_activity_maximum">MaximumActivity</string>
 </resources>

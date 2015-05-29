@@ -11,52 +11,51 @@ import pl.lizardproject.qe2015.patterns.contract.IFibonacciFunctionPageObject;
 
 public class FunctionFibonacciTestCasesWithPatterns extends ActivityInstrumentationTestCase2<MainActivity> {
 
-	private IFibonacciFunctionPageObject functionsPageObject;
-	private Solo solo;
+    private IFibonacciFunctionPageObject functionsPageObject;
+    private Solo solo;
 
-	public FunctionFibonacciTestCasesWithPatterns() {
-		super(MainActivity.class);
-	}
+    public FunctionFibonacciTestCasesWithPatterns() {
+        super(MainActivity.class);
+    }
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		solo = new Solo(getInstrumentation(), getActivity());
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        solo = new Solo(getInstrumentation(), getActivity());
 
-		//Given
-		functionsPageObject = new SimpleCalculatorPageObject(solo).
-				goToFibonacciFunctionsActivity();
-	}
+        //Given
+        functionsPageObject = new SimpleCalculatorPageObject(solo).goToFibonacciFunctionsActivity();
+    }
 
-	@Override
-	protected void tearDown() throws Exception {
-		solo.finishOpenedActivities();
-		super.tearDown();
-	}
+    @Override
+    protected void tearDown() throws Exception {
+        solo.finishOpenedActivities();
+        super.tearDown();
+    }
 
-	public void testFibonacciOfSeven() {
-		//Given
-		String expected = "13";
+    public void testFibonacciOfSeven() {
+        //Given
+        String expected = "13";
 
-		//When
-		functionsPageObject.fillFirstNumber("7");
-		functionsPageObject.clickFunction();
+        //When
+        functionsPageObject.fillFirstNumber("7");
+        functionsPageObject.clickFunction();
 
-		//Than
-		functionsPageObject.waitForResult(expected);
-		Assert.assertEquals(expected, functionsPageObject.getDisplayedResult());
-	}
+        //Then
+        functionsPageObject.waitForResult(expected);
+        Assert.assertEquals(expected, functionsPageObject.getDisplayedResult());
+    }
 
-	public void testFibonacciOfNine() {
-		//Given
-		String expected = "34";
+    public void testFibonacciOfNine() {
+        //Given
+        String expected = "34";
 
-		//When
-		functionsPageObject.fillFirstNumber("9");
-		functionsPageObject.clickFunction();
+        //When
+        functionsPageObject.fillFirstNumber("9");
+        functionsPageObject.clickFunction();
 
-		//Than
-		functionsPageObject.waitForResult(expected);
-		Assert.assertEquals(expected, functionsPageObject.getDisplayedResult());
-	}
+        //Then
+        functionsPageObject.waitForResult(expected);
+        Assert.assertEquals(expected, functionsPageObject.getDisplayedResult());
+    }
 }
