@@ -46,13 +46,13 @@ public class FunctionGcdTestCasesWithPatterns extends ActivityInstrumentationTes
         qeAsserts.assertThatViewEqualsText(gcdPageObject.getOutcomeView(), expected);
     }
 
-    public void testGCDof78and156() {
+    public void testGCDof78and169() {
         //Given
         String expected = "13";
 
         //When
         gcdPageObject.typeFirstNumber("78");
-        gcdPageObject.typeSecondNumber("156");
+        gcdPageObject.typeSecondNumber("169");
         gcdPageObject.calculateGCD();
 
         //Then
