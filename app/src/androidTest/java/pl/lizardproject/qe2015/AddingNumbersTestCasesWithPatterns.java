@@ -4,7 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
-import pl.lizardproject.qe2015.patterns.SimpleCalculatorPageObject;
+import pl.lizardproject.qe2015.patterns.page_object.SimpleCalculatorPageObject;
 import pl.lizardproject.qe2015.patterns.assertion.QEAsserts;
 
 public class AddingNumbersTestCasesWithPatterns extends ActivityInstrumentationTestCase2<MainActivity> {

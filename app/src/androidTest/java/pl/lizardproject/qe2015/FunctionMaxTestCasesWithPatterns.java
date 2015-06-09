@@ -4,15 +4,15 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
-import pl.lizardproject.qe2015.patterns.MinMaxCalculatorPageObject;
 import pl.lizardproject.qe2015.patterns.NumberListGeanie;
-import pl.lizardproject.qe2015.patterns.SimpleCalculatorPageObject;
 import pl.lizardproject.qe2015.patterns.assertion.QEAsserts;
 import pl.lizardproject.qe2015.patterns.model.NumberList;
+import pl.lizardproject.qe2015.patterns.page_object.MinMaxPageObject;
+import pl.lizardproject.qe2015.patterns.page_object.SimpleCalculatorPageObject;
 
 public class FunctionMaxTestCasesWithPatterns extends ActivityInstrumentationTestCase2<MainActivity> {
 
-    private MinMaxCalculatorPageObject minMaxFunctionsPageObject;
+    private MinMaxPageObject minMaxFunctionsPageObject;
     private Solo solo;
     private QEAsserts qeAsserts;
 
@@ -27,11 +27,11 @@ public class FunctionMaxTestCasesWithPatterns extends ActivityInstrumentationTes
         qeAsserts = new QEAsserts(solo);
         //Given
         minMaxFunctionsPageObject = new SimpleCalculatorPageObject(solo).
-                goToFibonacciFunctionsActivity().
-                goToGcdFunctionsActivity().
-                goToLcmFunctionsActivity().
-                goToPrimeFunctionsActivity().
-                goToMinMaxFunctionsActivity();
+                goToFibonacci().
+                goToGCD().
+                goToLCM().
+                goToPrime().
+                goToMinMax();
 
     }
 
@@ -47,11 +47,11 @@ public class FunctionMaxTestCasesWithPatterns extends ActivityInstrumentationTes
         String expected = numberList.max;
 
         //When
-        minMaxFunctionsPageObject.fillNumberList(numberList.list);
-        minMaxFunctionsPageObject.clickMax();
+        minMaxFunctionsPageObject.typeListOfNumbers(numberList.list);
+        minMaxFunctionsPageObject.calculateMax();
 
         //Than
-        qeAsserts.assertThatViewEqualsText(minMaxFunctionsPageObject.getViewDisplay(), expected);
+        qeAsserts.assertThatViewEqualsText(minMaxFunctionsPageObject.getOutcomeView(), expected);
     }
 
     public void testMaxOfListB() {
@@ -60,10 +60,10 @@ public class FunctionMaxTestCasesWithPatterns extends ActivityInstrumentationTes
         String expected = numberList.max;
 
         //When
-        minMaxFunctionsPageObject.fillNumberList(numberList.list);
-        minMaxFunctionsPageObject.clickMax();
+        minMaxFunctionsPageObject.typeListOfNumbers(numberList.list);
+        minMaxFunctionsPageObject.calculateMax();
 
         //Than
-        qeAsserts.assertThatViewEqualsText(minMaxFunctionsPageObject.getViewDisplay(), expected);
+        qeAsserts.assertThatViewEqualsText(minMaxFunctionsPageObject.getOutcomeView(), expected);
     }
 }

@@ -4,17 +4,17 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
-import junit.framework.Assert;
-
-import pl.lizardproject.qe2015.patterns.MinMaxCalculatorPageObject;
 import pl.lizardproject.qe2015.patterns.NumberListGeanie;
-import pl.lizardproject.qe2015.patterns.SimpleCalculatorPageObject;
+import pl.lizardproject.qe2015.patterns.assertion.QEAsserts;
 import pl.lizardproject.qe2015.patterns.model.NumberList;
+import pl.lizardproject.qe2015.patterns.page_object.MinMaxPageObject;
+import pl.lizardproject.qe2015.patterns.page_object.SimpleCalculatorPageObject;
 
 public class FunctionMinTestCasesWithPatterns extends ActivityInstrumentationTestCase2<MainActivity> {
 
-    private MinMaxCalculatorPageObject minMaxFunctionsPageObject;
+    private MinMaxPageObject minMaxFunctionsPageObject;
     private Solo solo;
+    private QEAsserts qeAsserts;
 
     public FunctionMinTestCasesWithPatterns() {
         super(MainActivity.class);
@@ -24,14 +24,14 @@ public class FunctionMinTestCasesWithPatterns extends ActivityInstrumentationTes
     protected void setUp() throws Exception {
         super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
-
+        qeAsserts = new QEAsserts(solo);
         //Given
         minMaxFunctionsPageObject = new SimpleCalculatorPageObject(solo).
-                goToFibonacciFunctionsActivity().
-                goToGcdFunctionsActivity().
-                goToLcmFunctionsActivity().
-                goToPrimeFunctionsActivity().
-                goToMinMaxFunctionsActivity();
+                goToFibonacci().
+                goToGCD().
+                goToLCM().
+                goToPrime().
+                goToMinMax();
     }
 
     @Override
@@ -46,12 +46,11 @@ public class FunctionMinTestCasesWithPatterns extends ActivityInstrumentationTes
         String expected = numberList.min;
 
         //When
-        minMaxFunctionsPageObject.fillNumberList(numberList.list);
-        minMaxFunctionsPageObject.clickMin();
+        minMaxFunctionsPageObject.typeListOfNumbers(numberList.list);
+        minMaxFunctionsPageObject.calculateMin();
 
         //Than
-        minMaxFunctionsPageObject.waitForResult(expected);
-        Assert.assertEquals(expected, minMaxFunctionsPageObject.getDisplayedResult());
+        qeAsserts.assertThatViewEqualsText(minMaxFunctionsPageObject.getOutcomeView(), expected);
     }
 
     public void testMinOfFourEightTenThirtyThreeFive() {
@@ -60,11 +59,10 @@ public class FunctionMinTestCasesWithPatterns extends ActivityInstrumentationTes
         String expected = numberList.min;
 
         //When
-        minMaxFunctionsPageObject.fillNumberList(numberList.list);
-        minMaxFunctionsPageObject.clickMin();
+        minMaxFunctionsPageObject.typeListOfNumbers(numberList.list);
+        minMaxFunctionsPageObject.calculateMin();
 
         //Than
-        minMaxFunctionsPageObject.waitForResult(expected);
-        Assert.assertEquals(expected, minMaxFunctionsPageObject.getDisplayedResult());
+        qeAsserts.assertThatViewEqualsText(minMaxFunctionsPageObject.getOutcomeView(), expected);
     }
 }

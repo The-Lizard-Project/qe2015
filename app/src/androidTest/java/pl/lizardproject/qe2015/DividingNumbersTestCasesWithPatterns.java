@@ -6,7 +6,7 @@ import com.robotium.solo.Solo;
 
 import java.text.DecimalFormat;
 
-import pl.lizardproject.qe2015.patterns.SimpleCalculatorPageObject;
+import pl.lizardproject.qe2015.patterns.page_object.SimpleCalculatorPageObject;
 import pl.lizardproject.qe2015.patterns.assertion.QEAsserts;
 
 public class DividingNumbersTestCasesWithPatterns extends ActivityInstrumentationTestCase2<MainActivity> {

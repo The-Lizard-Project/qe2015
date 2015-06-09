@@ -4,62 +4,60 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
-import junit.framework.Assert;
-
-import pl.lizardproject.qe2015.patterns.contract.IPrimeFunctionPageObject;
-import pl.lizardproject.qe2015.patterns.SimpleCalculatorPageObject;
+import pl.lizardproject.qe2015.patterns.assertion.QEAsserts;
+import pl.lizardproject.qe2015.patterns.page_object.PrimePageObject;
+import pl.lizardproject.qe2015.patterns.page_object.SimpleCalculatorPageObject;
 
 public class FunctionPrimeTestCasesWithPatterns extends ActivityInstrumentationTestCase2<MainActivity> {
 
-	private IPrimeFunctionPageObject functionsPageObject;
-	private Solo solo;
+    private PrimePageObject functionsPageObject;
+    private Solo solo;
+    private QEAsserts qeAsserts;
 
-	public FunctionPrimeTestCasesWithPatterns() {
-		super(MainActivity.class);
-	}
+    public FunctionPrimeTestCasesWithPatterns() {
+        super(MainActivity.class);
+    }
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		solo = new Solo(getInstrumentation(), getActivity());
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        solo = new Solo(getInstrumentation(), getActivity());
+        qeAsserts = new QEAsserts(solo);
+        //Given
+        functionsPageObject = new SimpleCalculatorPageObject(solo).
+                goToFibonacci().
+                goToGCD().
+                goToLCM().
+                goToPrime();
+    }
 
-		//Given
-		functionsPageObject = new SimpleCalculatorPageObject(solo).
-				goToFibonacciFunctionsActivity().
-				goToGcdFunctionsActivity().
-				goToLcmFunctionsActivity().
-				goToPrimeFunctionsActivity();
-	}
+    @Override
+    protected void tearDown() throws Exception {
+        solo.finishOpenedActivities();
+        super.tearDown();
+    }
 
-	@Override
-	protected void tearDown() throws Exception {
-		solo.finishOpenedActivities();
-		super.tearDown();
-	}
+    public void testPrimeOfThree() {
+        //Given
+        String expected = "Prime";
 
-	public void testPrimeOfThree() {
-		//Given
-		String expected = "Prime";
+        //When
+        functionsPageObject.typeInNumber("3");
+        functionsPageObject.calculatePrime();
 
-		//When
-		functionsPageObject.fillFirstNumber("3");
-		functionsPageObject.clickFunction();
+        //Than
+        qeAsserts.assertThatViewEqualsText(functionsPageObject.getOutcomeView(), expected);
+    }
 
-		//Than
-		functionsPageObject.waitForResult(expected);
-		Assert.assertEquals(expected, functionsPageObject.getDisplayedResult());
-	}
+    public void testPrimeOfFour() {
+        //Given
+        String expected = "Not prime";
 
-	public void testPrimeOfFour() {
-		//Given
-		String expected = "Not prime";
+        //When
+        functionsPageObject.typeInNumber("4");
+        functionsPageObject.calculatePrime();
 
-		//When
-		functionsPageObject.fillFirstNumber("4");
-		functionsPageObject.clickFunction();
-
-		//Than
-		functionsPageObject.waitForResult(expected);
-		Assert.assertEquals(expected, functionsPageObject.getDisplayedResult());
-	}
+        //Than
+        qeAsserts.assertThatViewEqualsText(functionsPageObject.getOutcomeView(), expected);
+    }
 }

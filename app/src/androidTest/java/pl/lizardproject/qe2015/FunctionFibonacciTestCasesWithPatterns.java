@@ -4,15 +4,15 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
-import junit.framework.Assert;
-
-import pl.lizardproject.qe2015.patterns.SimpleCalculatorPageObject;
-import pl.lizardproject.qe2015.patterns.contract.IFibonacciFunctionPageObject;
+import pl.lizardproject.qe2015.patterns.assertion.QEAsserts;
+import pl.lizardproject.qe2015.patterns.page_object.FibonacciPageObject;
+import pl.lizardproject.qe2015.patterns.page_object.SimpleCalculatorPageObject;
 
 public class FunctionFibonacciTestCasesWithPatterns extends ActivityInstrumentationTestCase2<MainActivity> {
 
-    private IFibonacciFunctionPageObject functionsPageObject;
+    private FibonacciPageObject functionsPageObject;
     private Solo solo;
+    private QEAsserts qeAsserts;
 
     public FunctionFibonacciTestCasesWithPatterns() {
         super(MainActivity.class);
@@ -22,9 +22,9 @@ public class FunctionFibonacciTestCasesWithPatterns extends ActivityInstrumentat
     protected void setUp() throws Exception {
         super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
-
+        qeAsserts = new QEAsserts(solo);
         //Given
-        functionsPageObject = new SimpleCalculatorPageObject(solo).goToFibonacciFunctionsActivity();
+        functionsPageObject = new SimpleCalculatorPageObject(solo).goToFibonacci();
     }
 
     @Override
@@ -38,11 +38,11 @@ public class FunctionFibonacciTestCasesWithPatterns extends ActivityInstrumentat
         String expected = "13";
 
         //When
-        functionsPageObject.fillFirstNumber("7");
-        functionsPageObject.clickFunction();
+        functionsPageObject.typeInNumber("7");
+        functionsPageObject.calculateFibonacci();
 
         //Then
-        qeAsserts.assertThatViewEqualsText(pageObject.getViewDisplay(), expected);
+        qeAsserts.assertThatViewEqualsText(functionsPageObject.getOutcomeView(), expected);
     }
 
     public void testFibonacciOfNine() {
@@ -50,10 +50,10 @@ public class FunctionFibonacciTestCasesWithPatterns extends ActivityInstrumentat
         String expected = "34";
 
         //When
-        functionsPageObject.fillFirstNumber("9");
-        functionsPageObject.clickFunction();
+        functionsPageObject.typeInNumber("9");
+        functionsPageObject.calculateFibonacci();
 
         //Then
-        qeAsserts.assertThatViewEqualsText(pageObject.getViewDisplay(), expected);
+        qeAsserts.assertThatViewEqualsText(functionsPageObject.getOutcomeView(), expected);
     }
 }

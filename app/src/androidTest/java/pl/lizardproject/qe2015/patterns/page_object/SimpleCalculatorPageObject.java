@@ -1,4 +1,4 @@
-package pl.lizardproject.qe2015.patterns;
+package pl.lizardproject.qe2015.patterns.page_object;
 
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +9,6 @@ import com.robotium.solo.Solo;
 import pl.lizardproject.qe2015.FibonacciActivity;
 import pl.lizardproject.qe2015.R;
 import pl.lizardproject.qe2015.Util.DisplayCondition;
-import pl.lizardproject.qe2015.patterns.contract.IFibonacciFunctionPageObject;
 
 public class SimpleCalculatorPageObject {
 
@@ -120,11 +119,11 @@ public class SimpleCalculatorPageObject {
         solo.clickOnView(buttonEqual);
     }
 
-    public IFibonacciFunctionPageObject goToFibonacciFunctionsActivity() {
+    public FibonacciPageObject goToFibonacci() {
         solo.clickOnView(buttonFunctions);
         solo.waitForActivity(FibonacciActivity.class, 2000);
 
-        return new FunctionCalculatorPageObject(solo);
+        return new FibonacciPageObject(solo);
     }
 
     public boolean waitForResult(String expected) {
